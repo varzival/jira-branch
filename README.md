@@ -21,6 +21,13 @@ ln -sf ./main.ts $HOME/.local/bin/jira-branch
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
 ```
 
+## Usage
+
+```
+jira-branch            # pick a ticket and write its .md file
+jira-branch --branch   # also check out main, pull, and create a new git branch
+```
+
 ## Configuration
 
 Copy `.env.example` to `.env` and fill in your credentials:
@@ -30,7 +37,7 @@ Copy `.env.example` to `.env` and fill in your credentials:
 | `JIRA_BASE_URL` | ✅ | Your Jira instance URL, e.g. `https://your-domain.atlassian.net` |
 | `JIRA_EMAIL` | ✅ | Your Atlassian account email |
 | `JIRA_API_TOKEN` | ✅ | API token from [id.atlassian.com/manage-profile/security/api-tokens](https://id.atlassian.com/manage-profile/security/api-tokens) |
-| `JIRA_MAIN_BRANCH` | — | Branch to check out from before creating a new branch (default: `main`) |
+| `JIRA_MAIN_BRANCH` | — | Branch to check out from before creating a new branch with `--branch` (default: `main`) |
 | `JIRA_EXTRA_FIELDS` | — | Comma-separated list of custom field IDs to append to the generated `.md` file |
 
 ## Discovering custom field IDs

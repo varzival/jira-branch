@@ -246,19 +246,21 @@ async function main() {
   console.log(`\nBranch: ${branchName}`);
 
   // Checkout new branch from main (runs in the user's pwd, not the script dir)
-  try {
-    await $`git checkout ${MAIN_BRANCH}`.quiet();
-    await $`git pull --ff-only`.quiet();
-  } catch {
-    console.error("Warning: could not switch to main or pull. Continuing anyway…");
-  }
+  if (process.argv.includes("--branch")) {
+    try {
+      await $`git checkout ${MAIN_BRANCH}`.quiet();
+      await $`git pull --ff-only`.quiet();
+    } catch {
+      console.error("Warning: could not switch to main or pull. Continuing anyway…");
+    }
 
-  try {
-    await $`git checkout -b ${branchName}`;
-    console.log(`Checked out new branch: ${branchName}`);
-  } catch (e: any) {
-    console.error(`Failed to create branch: ${e.message}`);
-    process.exit(1);
+    try {
+      await $`git checkout -b ${branchName}`;
+      console.log(`Checked out new branch: ${branchName}`);
+    } catch (e: any) {
+      console.error(`Failed to create branch: ${e.message}`);
+      process.exit(1);
+    }
   }
 
   // Write ticket description to .md file
